@@ -1,31 +1,32 @@
-pipeine {
-agent any
-stages{
-   stage('checkout'){
- steps{
-  git branch: 'main',url:'https://github.com/Harsh07core/DA_Lab.git'
-     }
-  }
-  stages('Deploy'){
-      steps{
-        sh'''
-          mkdir -p deployed_html
-          cp *.html deployed_html/
-          ''' 
-         }
-       }
-     }
-  }
-   post{
-     success{
-          publishHTML_(target:[
-                  allowMissing:false,
-                     keepAll: true,
-                     reportDir: 'deployed_html',
-                     reportFiles:'from.html',
-                       reportName: 'My Webpage'
-       ])
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Harsh07core/DA_Lab.git'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh '''
+                    mkdir -p deployed_html
+                    cp *.html deployed_html/
+                '''
+            }
+        }
     }
- }
 
-
+    post {
+        success {
+            publishHTML(target: [
+                allowMissing: false,
+                keepAll: true,
+                reportDir: 'deployed_html',
+                reportFiles: 'from.html',
+                reportName: 'My Webpage'
+            ])
+        }
+    }
+}
