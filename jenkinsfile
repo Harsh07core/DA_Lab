@@ -3,7 +3,7 @@ agent any
 stages{
    stage('checkout'){
  steps{
-  git branch: 'main',url:''
+  git branch: 'main',url:'https://github.com/Harsh07core/DA_Lab/tree/main'
      }
   }
   stages('Deploy'){
@@ -18,6 +18,14 @@ stages{
   }
    post{
      success{
-          publishHTML_(target:)
+          publishHTML_(target:[
+                  allowMissing:false,
+                     keepAll: true,
+                     reportDir: 'deployed_html',
+                     reportFiles:'from.html',
+                       reportName: 'My Webpage'
+       ])
     }
-}
+ }
+
+
