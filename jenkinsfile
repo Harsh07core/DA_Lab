@@ -3,7 +3,7 @@ agent any
 stages{
    stage('checkout'){
  steps{
-  git branch: 'main',url:'https://github.com/Harsh07core/DA_Lab/tree/main'
+  git branch: 'main',url:'https://github.com/Harsh07core/DA_Lab.git'
      }
   }
   stages('Deploy'){
